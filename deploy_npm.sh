@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo -e "\n-> NPM INSTALL"
-npm i
+docker-compose exec web npm i
 
 echo -e "\n-> NPM RUN BUILD"
-npm run prod
+docker-compose exec web npm run prod

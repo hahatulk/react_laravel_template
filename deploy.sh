@@ -1,23 +1,23 @@
 #!/bin/bash
 
 echo "-> APP DOWN"
-/opt/php/8.0/bin/php artisan down
+docker-compose exec web php artisan down
 
 echo -e "\n-> GIT PULL"
 git pull
 
 echo -e "\n-> COMPOSER INSTALL"
-/opt/php/8.0/bin/php ~/bin/composerphp8/composer install
-/opt/php/8.0/bin/php artisan package:discover --ansi
+docker-compose exec web php ~/bin/composerphp8/composer install
+docker-compose exec web php artisan package:discover --ansi
 
 echo -e "\n-> MIGRATE"
-/opt/php/8.0/bin/php artisan migrate --force
+docker-compose exec web php artisan migrate --force
 
 echo -e "\n-> CONFIG CLEAR"
-/opt/php/8.0/bin/php artisan config:clear
+docker-compose exec web php artisan config:clear
 
 echo -e "\n-> APP UP"
-/opt/php/8.0/bin/php artisan up
+docker-compose exec web php artisan up
 
 echo -e "\n-> APP QUEUE RESTART"
-/opt/php/8.0/bin/php artisan queue:restart
+docker-compose exec web php artisan queue:restart
